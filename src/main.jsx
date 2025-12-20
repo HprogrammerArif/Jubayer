@@ -8,6 +8,7 @@ import {
 import Roots from './Root/Roots.jsx';
 import ErrorPage from './component/ErrorPage/ErrorPage.jsx';
 import Home from './component/Home/Home.jsx';
+import ProjectTab from './component/Page.jsx/ProjectTab.jsx';
 
 const router = createBrowserRouter([
   {
@@ -19,6 +20,10 @@ const router = createBrowserRouter([
         path: "/",
         element:<Home/> ,
       },
+      {
+        path: "/prject",
+        element:<ProjectTab/> ,
+      }
     ],
   },
 ]);

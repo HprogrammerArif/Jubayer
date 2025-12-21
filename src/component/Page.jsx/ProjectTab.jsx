@@ -2,7 +2,6 @@ import React from "react";
 import image from "../../image/Asset.png";
 import image1 from "../../image/Frame 2147227310.png";
 import image2 from "../../image/Frame 1000004068.png";
-import { SlArrowRight } from "react-icons/sl";
 import ProjectFile from "./ProjectFile";
 import Contact from "./Contact";
 

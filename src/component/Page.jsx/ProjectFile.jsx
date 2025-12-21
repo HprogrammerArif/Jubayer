@@ -76,26 +76,23 @@ export default function ProjectFile() {
         });
 
   return (
-    <div className="min-h-screen bg-[#0a1628] py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-7xl mx-auto">
-        {/* Filter Buttons */}
-        <div className="flex flex-wrap gap-3 justify-center mb-12">
-          {categories.map((category) => (
-            <button
-              key={category}
-              onClick={() => setActiveCategory(category)}
-              className={`px-6 py-2 rounded-full text-sm font-medium transition-all ${
-                activeCategory === category
-                  ? "bg-blue-600 text-white"
-                  : "bg-transparent text-gray-300 border border-gray-600 hover:border-blue-500"
-              }`}
-            >
-              {category}
-            </button>
-          ))}
-        </div>
-
-        {/* Project Grid */}
+    <div className="">
+      <div className="flex flex-wrap gap-3 justify-center mt-10 bg-[#00184C] py-5">
+        {categories.map((category) => (
+          <button
+            key={category}
+            onClick={() => setActiveCategory(category)}
+            className={`px-6 py-2 rounded-full text-sm font-medium transition-all cursor-pointer ${
+              activeCategory === category
+                ? "bg-blue-600 text-white"
+                : "bg-transparent text-gray-300 border border-gray-600 hover:border-blue-500"
+            }`}
+          >
+            {category}
+          </button>
+        ))}
+      </div>
+      <div className="max-w-7xl mx-auto bg-[#0a1628] py-12 px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {filteredProjects.map((project) => (
             <div
@@ -112,8 +109,6 @@ export default function ProjectFile() {
                   className="w-full h-full object-cover"
                 />
               </div>
-
-              {/* Project Content */}
               <div className="p-6">
                 <h3 className="text-white text-xl font-semibold mb-3">
                   {project.title}

@@ -1,94 +1,72 @@
 "use client";
 
-import { useState } from "react";
-
-const projects = [
-  {
-    id: 1,
-    category: "Website Design",
-    title: "Interaction Design",
-    headline: "CASE STUDY",
-    description:
-      "I create designs that are not only visually appealing but also easy to use. My strength lies in combining or I my strength lies in combining or I create designs that are not only visually appealing but also easy to use.",
-    image:
-      "https://res.cloudinary.com/dfsu0cuvb/image/upload/v1760418336/b075a41637a05c9217374a2e411f8a04d536e2da_x1m4np.jpg",
-  },
-  {
-    id: 2,
-    category: "Mobile App",
-    title: "Interaction Design",
-    headline: "CASE ",
-    description:
-      "I create designs that are not only visually appealing but also easy to use. My strength lies in combining or I my strength lies in combining or I create designs that are not only visually appealing but also easy to use.",
-    image:
-      "https://res.cloudinary.com/dfsu0cuvb/image/upload/v1760418336/067134af3ee4b96f623780d3c14577fca6342796_yzsy4q.jpg",
-  },
-  {
-    id: 3,
-    category: "Live Projects",
-    title: "Interaction Design",
-    headline: "CASE STUDY",
-    description:
-      "I create designs that are not only visually appealing but also easy to use. My strength lies in combining or I my strength lies in combining or I create designs that are not only visually appealing but also easy to use.",
-    image:
-      "https://res.cloudinary.com/dfsu0cuvb/image/upload/v1759822517/better-learner-cover_zfyxqo.jpg",
-  },
-  {
-    id: 4,
-    category: "Case Study",
-    title: "Interaction Design",
-    headline: "CASE STUDY",
-    description:
-      "I create designs that are not only visually appealing but also easy to use. My strength lies in combining or I my strength lies in combining or I create designs that are not only visually appealing but also easy to use.",
-    image:
-      "https://res.cloudinary.com/dfsu0cuvb/image/upload/v1759822517/what-type-of-learner-is-your-child-min-scaled_mkm8a1.jpg",
-  },
-  {
-    id: 5,
-    category: "Graphic Design",
-    title: "Interaction Design",
-    headline: "CASE STUDY",
-    description:
-      "I create designs that are not only visually appealing but also easy to use. My strength lies in combining or I my strength lies in combining or I create designs that are not only visually appealing but also easy to use.",
-    image:
-      "https://res.cloudinary.com/dfsu0cuvb/image/upload/v1759822517/1_2LywpPsQnnuRwQpDVrydAQ_cfd3ev.jpg",
-  },
-  {
-    id: 6,
-    category: "Website Design",
-    title: "Interaction Design",
-    headline: "CASE STUDY",
-    description:
-      "I create designs that are not only visually appealing but also easy to use. My strength lies in combining or I my strength lies in combining or I create designs that are not only visually appealing but also easy to use.",
-    image:
-      "https://res.cloudinary.com/dfsu0cuvb/image/upload/v1759822516/images_2_gsamts.jpg",
-  },
-];
+import axios from "axios";
+import { useEffect, useState } from "react";
+import { NavLink } from "react-router-dom";
 
 const categories = [
   "All Project",
   "Website Design",
   "Mobile App",
   "Live Projects",
-  "Case Study's",
+  "Case Study",
   "Graphic Design",
 ];
 
 export default function ProjectFile() {
   const [activeCategory, setActiveCategory] = useState("All Project");
+  const [projects, setProjects] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-  const filteredProjects =
-    activeCategory === "All Project"
-      ? projects
-      : projects.filter((project) => {
-          if (activeCategory === "Case Study's") {
-            return project.category === "Case Study";
-          }
-          return project.category === activeCategory;
-        });
+  useEffect(() => {
+    const fetchProjects = async () => {
+      try {
+        const res = await axios.get("https://ahmadjubayerr.pythonanywhere.com/api/projects/");
+        setProjects(res.data || []);
+        console.log("API Projects:", res.data);
+      } catch (error) {
+        console.error("Projects API Error:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchProjects();
+  }, []);
+
+  const normalizeCategory = (cat) => {
+    if (!cat) return "";
+    return cat
+      .split("_")
+      .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(" ");
+  };
+
+  const filteredProjects = projects.filter((project) => {
+    if (activeCategory === "All Project") return true;
+
+    const projectCategory = normalizeCategory(project.category);
+
+    if (activeCategory === "Case Study") {
+      return projectCategory === "Case Study";
+    }
+
+    return projectCategory === activeCategory;
+  });
+
+  const baseURL = "https://ahmadjubayerr.pythonanywhere.com";
+
+  if (loading) {
+    return (
+      <div className="min-h-[60vh] flex items-center justify-center bg-[#00184C]">
+        <p className="text-white text-xl">Loading projects...</p>
+      </div>
+    );
+  }
 
   return (
     <div className="">
+      {/* Category Filter Buttons */}
       <div className="flex flex-wrap gap-3 justify-center mt-10 bg-[#00184C] py-5">
         {categories.map((category) => (
           <button
@@ -104,34 +82,59 @@ export default function ProjectFile() {
           </button>
         ))}
       </div>
-      <div className="container mx-auto  py-12 px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {filteredProjects.map((project) => (
-            <div key={project.id} className=" rounded-2xl overflow-hidden">
-              {/* Project Image */}
-              <div className=" h-[330px] flex items-center justify-center">
-                <img
-                  src={project.image || "/placeholder.svg"}
-                  alt={project.title}
-                  width={755}
-                  height={300}
-                  className="w-full h-full object-cover"
-                />
+      <div className="container mx-auto py-12 px-4 sm:px-6 lg:px-8">
+        {filteredProjects.length === 0 ? (
+          <div className="text-center text-gray-400 py-20 text-xl">
+            No projects found in this category yet
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {filteredProjects.map((project) => (
+              <div
+                key={project.id || project.title}
+                onClick={() => navigate(`/project_details/${encodeURIComponent(project.title)}`)}
+                className="rounded-2xl overflow-hidden bg-gray-900/40 border border-gray-800 hover:border-blue-600/50 transition-all duration-300"
+              >
+                <div className="h-[330px] flex items-center justify-center bg-black/40">
+                  {project.canvas_image ? (
+                    <img
+                      src={`${baseURL}${project.canvas_image}`}
+                      alt={project.title || "Project image"}
+                      className="w-full h-full object-cover"
+                    />
+                  ) : (
+                    <div className="text-gray-500 text-center p-6">
+                      No preview image available
+                    </div>
+                  )}
+                </div>
+                <div className="p-6">
+                  <button className="px-5 py-1.5 mb-4 rounded-full border border-gray-600 text-gray-300 text-sm font-medium uppercase tracking-wider">
+                    {normalizeCategory(project.category) || "Project"}
+                  </button>
+
+                  <h3 className="text-white text-2xl font-semibold mb-3">
+                    {project.title || "Untitled Project"}
+                  </h3>
+
+                  {project.tag && (
+                    <p className="text-blue-400 text-sm mb-3">#{project.tag}</p>
+                  )}
+
+                  {project.duration && (
+                    <p className="text-gray-500 text-sm mb-4">
+                      Duration: {project.duration}
+                    </p>
+                  )}
+
+                  <p className="text-gray-300 text-base leading-relaxed line-clamp-4">
+                    {project.body || "No description available..."}
+                  </p>
+                </div>
               </div>
-              <div className="py-6">
-                <button className="px-6 py-2 mb-3 rounded-full border border-gray-600 text-gray-300 text-[18px] font-semibold   transition-all">
-                  {project.headline}
-                </button>
-                <h3 className="text-white text-[22px] font-semibold mb-3">
-                  {project.title}
-                </h3>
-                <p className="text-gray-400 text-[18px] leading-relaxed mb-6">
-                  {project.description}
-                </p>
-              </div>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );

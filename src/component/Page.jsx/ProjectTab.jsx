@@ -4,7 +4,9 @@ import image2 from "../../image/Frame 1000004068.png";
 import ProjectFile from "./ProjectFile";
 import Contact from "./Contact";
 
+
 function ProjectTab() {
+  
   return (
     <div className="bg-[#081228]">
       <div className="">
@@ -63,8 +65,8 @@ function ProjectTab() {
           </div>
         </div>
       </div>
-      <ProjectFile/>
-      <Contact/>
+      <ProjectFile />
+      <Contact />
     </div>
   );
 }

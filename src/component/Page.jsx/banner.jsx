@@ -142,21 +142,21 @@ function banner() {
           {/* Stats Section */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mt-6">
             <div>
-              <div className="text-5xl md:text-6xl font-bold text-blue-500">
+              <div className="text-5xl md:text-6xl font-bold text-[#0137fa]">
                 {websiteCount}+
               </div>
               <p className="text-gray-400 mt-3 text-lg">Website Design</p>
             </div>
 
             <div>
-              <div className="text-5xl md:text-6xl font-bold text-blue-500">
+              <div className="text-5xl md:text-6xl font-bold text-[#0137fa]">
                 {mobileCount}+
               </div>
               <p className="text-gray-400 mt-3 text-lg">Mobile App Design</p>
             </div>
 
             <div>
-              <div className="text-5xl md:text-6xl font-bold text-blue-500">
+              <div className="text-5xl md:text-6xl font-bold text-[#0137fa]">
                 {projectCount}+
               </div>
               <p className="text-gray-400 mt-3 text-lg">Live Projects</p>

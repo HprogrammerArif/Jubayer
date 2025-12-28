@@ -3,7 +3,7 @@
 import { useParams, useNavigate, NavLink } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import image from "../../image/Asset.png";
+import image from "../../image/Element.png";
 import image1 from "../../image/Project hero video 1.mp4";
 import image2 from "../../image/Frame 1000004068.png";
 
@@ -81,11 +81,11 @@ const ProjectDetails = () => {
     <div className="min-h-screen bg-[#081228] text-white pb-16">
       <video src={image1} autoPlay loop muted playsInline className=""></video>
       <div className="">
-        <div className="absolute top-10 left-2/7">
+        <div className="absolute top-10 left-2/12">
           <img src={image} alt="" className="mx-auto h-[47vh] " />
         </div>
         <div className="flex items-center justify-center">
-          <div className="absolute  top-30">
+          <div className="absolute  top-8">
             <div className="relative text-center px-6 max-w-4xl mx-auto">
               <div className="flex items-center justify-center mb-7">
                 <img
@@ -141,11 +141,42 @@ const ProjectDetails = () => {
               </div>
 
               {/* Main Headline - Rozha-like font (use Google Fonts or custom) */}
-              <h1 className="text-white text-4xl md:text-5xl lg:text-[40px] rozha font-bold leading-tight tracking-wide drop-shadow-2xl">
+              <h1 className="text-white text-4xl md:text-5xl lg:text-[48px] rozha font-bold leading-tight tracking-wide drop-shadow-2xl">
                 Car Rental: Smart Rides,
                 <br />
                 Smooth Journeys
               </h1>
+            </div>
+            <div className="relative max-w-3xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-10 text-center md:text-left px-6 py-5">
+              {/* Duration */}
+              <div>
+                <p className="text-gray-400 text-[24px] tracking-wide mb-2 text-center">
+                  Duration
+                </p>
+                <h1 className="text-white text-3xl md:text-[30px] font-semibold text-center">
+                  {project.duration}
+                </h1>
+              </div>
+
+              {/* Category */}
+              <div>
+                <p className="text-gray-400 text-[24px] tracking-wide mb-2 text-center">
+                  Category
+                </p>
+                <h1 className="text-white text-3xl md:text-[30px] font-semibold text-center">
+                  {project.category}
+                </h1>
+              </div>
+
+              {/* Responsibility */}
+              <div>
+                <p className="text-gray-400 text-[24px] tracking-wide mb-2 text-center">
+                  Responsibility
+                </p>
+                <h1 className="text-white text-3xl md:text-[30px] font-semibold text-center">
+                  UX & UI Design
+                </h1>
+              </div>
             </div>
           </div>
         </div>
@@ -159,7 +190,7 @@ const ProjectDetails = () => {
         <div className="max-w-6xl mx-auto flex flex-col items-center -mt-30">
           <div className="lg:pb-20 ">
             {project.overview_video_link && (
-              <div className="  rounded-2xl max-w-2xl overflow-hidden border-40 border-gray-800 bg-black">
+              <div className="  rounded-4xl max-w-3xl overflow-hidden border-48 border-gray-800 bg-black">
                 <div className="aspect-video">
                   <video
                     src={project.overview_video_link}

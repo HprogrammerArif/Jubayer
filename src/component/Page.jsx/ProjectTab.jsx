@@ -1,4 +1,4 @@
-import image from "../../image/Asset.png";
+import image from "../../image/Element.png";
 import image1 from "../../image/Project hero video 1.mp4";
 import image2 from "../../image/Frame 1000004068.png";
 import ProjectFile from "./ProjectFile";
@@ -10,7 +10,7 @@ function ProjectTab() {
     <div className="bg-[#081228]">
       <video src={image1} autoPlay loop muted playsInline className=""></video>
       <div className="">
-        <div className="absolute top-10 left-2/7">
+        <div className="absolute top-10 left-2/12">
           <img src={image} alt="" className="mx-auto h-[47vh] " />
         </div>
         <div className="flex items-center justify-center">

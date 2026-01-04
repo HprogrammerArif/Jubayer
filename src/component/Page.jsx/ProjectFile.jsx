@@ -37,6 +37,10 @@ export default function ProjectFile() {
     fetchProjects();
   }, []);
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   const normalizeCategory = (cat) => {
     if (!cat) return "";
     return cat
@@ -69,7 +73,6 @@ export default function ProjectFile() {
 
   return (
     <div className="">
-      
       <div className="flex flex-wrap gap-3 justify-center mt-10 bg-[#00184C] py-5">
         {categories.map((category) => (
           <button
@@ -113,7 +116,7 @@ export default function ProjectFile() {
                 </div>
                 <div className="p-6">
                   <button className="px-5 py-1.5 mb-4 rounded-full border border-gray-600 text-gray-300 text-sm font-medium uppercase tracking-wider">
-                    {normalizeCategory(project.category) || "Project"}
+                    {normalizeCategory(project.tag) || "Project"}
                   </button>
 
                   <h3 className="text-white text-2xl font-semibold mb-3">

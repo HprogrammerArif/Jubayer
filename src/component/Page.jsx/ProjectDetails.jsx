@@ -10,12 +10,21 @@ import image2 from "../../image/Frame 1000004068.png";
 const ProjectDetails = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-
   const [project, setProject] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-
   const baseURL = "https://ahmadjubayerr.pythonanywhere.com";
+
+  const getYouTubeId = (url) => {
+    if (!url) return null;
+    const regExp =
+      /^.*(youtu\.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+    const match = url.match(regExp);
+    return match && match[2].length === 11 ? match[2] : null;
+  };
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   useEffect(() => {
     const fetchProject = async () => {
@@ -63,6 +72,7 @@ const ProjectDetails = () => {
       </div>
     );
   }
+
   if (!project) {
     return (
       <div className="min-h-screen flex flex-col items-center justify-center bg-[#081228] text-white">
@@ -141,10 +151,8 @@ const ProjectDetails = () => {
               </div>
 
               {/* Main Headline - Rozha-like font (use Google Fonts or custom) */}
-              <h1 className="text-white text-4xl md:text-5xl lg:text-[48px] rozha font-bold leading-tight tracking-wide drop-shadow-2xl">
-                Car Rental: Smart Rides,
-                <br />
-                Smooth Journeys
+              <h1 className="text-white max-w-3xl text-4xl md:text-5xl lg:text-[48px] rozha font-bold leading-tight tracking-wide drop-shadow-2xl">
+                {project.title}
               </h1>
             </div>
             <div className="relative max-w-3xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-10 text-center md:text-left px-6 py-5">
@@ -181,35 +189,55 @@ const ProjectDetails = () => {
           </div>
         </div>
       </div>
+
       <div className="">
         <button
           onClick={() => navigate(-1)}
           className="mb-10 flex items-center gap-2 text-gray-500 hover:text-gray-400 cursor-pointer transition-colors text-lg bg-[#00184C] w-full py-8 px-50  mt-14"
         ></button>
 
-        <div className="max-w-6xl mx-auto flex flex-col items-center -mt-30">
-          <div className="lg:pb-20 ">
+        <div className="max-w-7xl mx-auto flex flex-col items-center -mt-20">
+          <div className="w-full pb-16 lg:pb-24">
             {project.overview_video_link && (
-              <div className="  rounded-4xl max-w-3xl overflow-hidden border-48 border-gray-800 bg-black">
-                <div className="aspect-video">
-                  <video
-                    src={project.overview_video_link}
-                    controls
-                    className="w-full h-full object-cover"
-                    poster={`${baseURL}${project.canvas_image || ""}`}
-                  >
-                    Your browser does not support the video tag.
-                  </video>
+              <div className="w-full max-w-[80vh] mx-auto overflow-hidden border-32 border-gray-800 bg-black rounded-3xl shadow-2xl">
+                <div
+                  className="relative w-full"
+                  style={{ aspectRatio: "16/9" }}
+                >
+                  {getYouTubeId(project.overview_video_link) ? (
+                    <iframe
+                      src={`https://www.youtube.com/embed/${getYouTubeId(
+                        project.overview_video_link
+                      )}?autoplay=1&mute=1&rel=0&modestbranding=1&controls=1&showinfo=0`}
+                      title="Project Overview Video"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowFullScreen
+                      className="absolute inset-0 w-full h-full "
+                      poster={`${baseURL}${project.canvas_image || ""}`}
+                    />
+                  ) : (
+                    <video
+                      src={`${baseURL}${project.overview_video_link}`}
+                      controls
+                      autoPlay
+                      muted
+                      playsInline
+                      className="absolute inset-0 w-full h-full object-cover "
+                      poster={`${baseURL}${project.canvas_image || ""}`}
+                    >
+                      Your browser does not support the video tag.
+                    </video>
+                  )}
                 </div>
               </div>
             )}
           </div>
 
           {/* Main Canvas Image */}
-          {project.canvas_image && (
-            <div className="mb-16 rounded-2xl overflow-hidden border border-gray-800 shadow-2xl">
+          {project.svg_file && (
+            <div className="w-full max-w-[1400px] mx-auto mb-16 rounded-3xl overflow-hidden border border-gray-800 shadow-2xl">
               <img
-                src={`${baseURL}${project.canvas_image}`}
+                src={`${baseURL}${project.svg_file}`}
                 alt={project.title || "Project preview"}
                 className="w-full h-auto object-cover"
                 loading="lazy"

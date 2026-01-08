@@ -6,6 +6,7 @@ import image2 from "../../image/2.png"
 import image3 from "../../image/3.png"
 import image4 from "../../image/Screenshot_2 1.png"
 import image5 from "../../image/Didiflow cover 1.png"
+import { GoTriangleLeft, GoTriangleRight } from "react-icons/go"
 
 export default function ProjectCardsCarousel() {
   const [currentIndex, setCurrentIndex] = useState(0)
@@ -69,14 +70,15 @@ export default function ProjectCardsCarousel() {
 
   return (
     <div className="w-full py-12">
-      <div className="flex items-center justify-center gap-6 mx-auto">
+      <div className="flex items-center justify-center gap-1 mx-auto">
         <button
           onClick={handlePrev}
           disabled={isAnimating}
-          className="flex-shrink-0 p-3 rounded-lg bg-slate-800 hover:bg-slate-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-200 text-white text-xl"
+          className="flex-shrink-0 disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-200 text-white text-xl"
           aria-label="Previous slide"
         >
-          ←
+          <GoTriangleLeft size={70}  />
+
         </button>
 
         <div className="flex gap-6 overflow-hidden">
@@ -123,10 +125,11 @@ export default function ProjectCardsCarousel() {
         <button
           onClick={handleNext}
           disabled={isAnimating}
-          className="flex-shrink-0 p-3 rounded-lg bg-slate-800 hover:bg-slate-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-200 text-white text-xl"
+          className="flex-shrink-0  rounded-lg  disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-200 text-white text-xl"
           aria-label="Next slide"
         >
-          →
+          <GoTriangleRight size={70} />
+
         </button>
       </div>
     </div>

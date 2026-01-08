@@ -99,14 +99,16 @@ export default function ProjectFile() {
               <div
                 key={project.id}
                 onClick={() => navigate(`/project_details/${project.id}`)}
-                className="rounded-2xl overflow-hidden bg-gray-900/40 "
+                className="rounded-2xl overflow-hidden bg-gray-900/40 group" 
               >
-                <div className="h-[330px] flex items-center justify-center bg-black/40">
+                <div className="h-[330px] flex items-center justify-center bg-black/40 overflow-hidden">
+                  {" "}
+                  {/* overflow-hidden যোগ করা ভালো */}
                   {project.canvas_image ? (
                     <img
                       src={`${baseURL}${project.canvas_image}`}
                       alt={project.title || "Project image"}
-                      className="w-full h-full object-cover"
+                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" 
                     />
                   ) : (
                     <div className="text-gray-500 text-center p-6">
@@ -114,6 +116,7 @@ export default function ProjectFile() {
                     </div>
                   )}
                 </div>
+
                 <div className="p-6">
                   <button className="px-5 py-1.5 mb-4 rounded-full border border-gray-600 text-gray-300 text-sm font-medium uppercase tracking-wider">
                     {normalizeCategory(project.tag) || "Project"}

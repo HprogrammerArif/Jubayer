@@ -1,12 +1,14 @@
 import React from 'react'
 import HeroSection from './heroSection'
 
-function about() {
+function AboutSection() {
   return (
-    <div>
-      <HeroSection></HeroSection>
+    <div className='bg-[#081228] text-white'>
+      <div>
+        <HeroSection></HeroSection>
+      </div>
     </div>
   )
 }
 
-export default about
+export default AboutSection

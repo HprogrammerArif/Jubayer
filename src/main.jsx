@@ -7,6 +7,8 @@ import ErrorPage from "./component/ErrorPage/ErrorPage.jsx";
 import Home from "./component/Home/Home.jsx";
 import ProjectTab from "./component/Page.jsx/ProjectTab.jsx";
 import ProjectDetails from "./component/Page.jsx/ProjectDetails.jsx";
+import About from "./component/Page.jsx/About.jsx";
+import AboutSection from "./component/About/about.jsx";
 
 const router = createBrowserRouter([
   {
@@ -25,6 +27,10 @@ const router = createBrowserRouter([
       {
         path: "/project_details/:id",
         element: <ProjectDetails />,
+      },
+      {
+        path: "/about",
+        element: <AboutSection />,
       },
     ],
   },

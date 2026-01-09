@@ -1,8 +1,8 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
-import image from "../../image/EllipseFinal.svg";
-import image1 from "../../image/Home Logo.svg";
+import image from "../../image/Ellipse 230.png";
+import image1 from "../../image/Frame 1000004068.png";
 
 function Navbar() {
   const routes = ["Home", "Project", "Services", "About Me"];
@@ -139,7 +139,7 @@ function Navbar() {
         </div>
       </div>
 
-      <div className="relative w-[240px] h-[240px]">
+      <div className="relative w-[400px] h-[400px]">
         <div
           className="absolute inset-0 will-change-transform"
           style={{
@@ -150,7 +150,7 @@ function Navbar() {
           {routes.map((route, index) => {
             const angle = index * angleStep;
             const radian = (angle - 90) * (Math.PI / 180);
-            const radius = 100;
+            const radius = 180;
             const x = Math.cos(radian) * radius;
             const y = Math.sin(radian) * radius;
 
@@ -163,7 +163,7 @@ function Navbar() {
                 onClick={() => handleRouteClick(index)}
                 onMouseEnter={() => setCursorVariant("hover")}
                 onMouseLeave={() => setCursorVariant("default")}
-                className="absolute left-1/2 top-1/2 z-10 hover:scale-110 transition-transform duration-300 w-[240px] h-[120px] flex items-center justify-center"
+                className="absolute left-1/2 top-1/2 z-10 hover:scale-110 transition-transform duration-300 w-[200px] h-[80px] flex items-center justify-center"
                 style={{
                   transform: `translate(-50%, -50%) translate(${x}px, ${y}px)`,
                   transition:
@@ -178,9 +178,13 @@ function Navbar() {
                       transition: "transform 0.8s cubic-bezier(0.4, 0, 0.2, 1)",
                     }}
                   >
-                    <img
-                      src={image}
-                      className="bg-cover bg-center shadow-lg w-[120px] h-[55px]"
+                    <div
+                      className="bg-cover bg-center shadow-lg w-[180px] h-[70px]"
+                      style={{
+                        backgroundImage: `url(${image})`,
+                        backgroundSize: "contain",
+                        backgroundRepeat: "no-repeat",
+                      }}
                     />
                   </div>
                 )}
@@ -203,21 +207,21 @@ function Navbar() {
                       <defs>
                         <path
                           id={`curve-${index}`}
-                          d="M 18,65 Q 100,0 190,60"
+                          d="M 10,50 Q 100,0 190,50"
                           fill="transparent"
                         />
                       </defs>
                       <text
-                        className="text-md font-semibold tracking-wider fill-white"
+                        className="text-xl font-semibold uppercase tracking-wider fill-white"
                         style={{
                           transition: "fill 0.3s ease",
-                          fontSize: "16px",
+                          fontSize: "18px",
                           fontWeight: "600",
                         }}
                       >
                         <textPath
                           href={`#curve-${index}`}
-                          startOffset="52%"
+                          startOffset="50%"
                           textAnchor="middle"
                         >
                           {route}
@@ -228,7 +232,7 @@ function Navbar() {
                 ) : (
                   /* Straight Text for Inactive State */
                   <span
-                    className="text-lg font-semibold block whitespace-nowrap text-gray-400"
+                    className="text-xl font-semibold block whitespace-nowrap text-gray-400"
                     style={{
                       transform: `rotate(${-rotation}deg)`,
                       transition:
@@ -243,9 +247,9 @@ function Navbar() {
           })}
         </div>
 
-        <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-20 h-20 flex items-center justify-center pointer-events-none z-20">
+        <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-32 h-32 flex items-center justify-center pointer-events-none z-20">
           <div className="w-full h-full rounded-2xl shadow-2xl flex items-center justify-center relative overflow-hidden">
-            <img src={image1} className="w-12 h-14" alt="" />
+            <img src={image1} className="w-20 h-24" alt="" />
           </div>
         </div>
       </div>

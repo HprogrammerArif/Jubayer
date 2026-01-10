@@ -164,7 +164,7 @@ function Navbar() {
                 onClick={() => handleRouteClick(index)}
                 onMouseEnter={() => setCursorVariant("hover")}
                 onMouseLeave={() => setCursorVariant("default")}
-                className="absolute left-1/2 top-1/2 z-10 hover:scale-110 transition-transform duration-300 w-[240px] h-[120px] flex items-center justify-center"
+                className="absolute left-1/2 top-1/2 z-10 hover:scale-110 transition-transform duration-300 w-[240px] h-[140px] flex items-center justify-center"
                 style={{
                   transform: `translate(-50%, -50%) translate(${x}px, ${y}px) rotate(${angle}deg)`,
                   transition:
@@ -179,7 +179,11 @@ function Navbar() {
                 >
                   <img
                     src={isActive ? selectedBg : nonSelectedBg}
-                    className="bg-cover bg-center shadow-lg w-[120px] h-[55px]"
+                    className="bg-cover bg-center shadow-lg transition-all duration-300"
+                    style={{
+                      width: isActive ? "136px" : "120px",
+                      height: isActive ? "66px" : "55px",
+                    }}
                     alt=""
                   />
                 </div>
@@ -209,7 +213,7 @@ function Navbar() {
                       }`}
                       style={{
                         transition: "all 0.3s ease",
-                        fontSize: isActive ? "16px" : "14px",
+                        fontSize: isActive ? "15px" : "14px",
                         fontWeight: isActive ? "600" : "500",
                       }}
                     >
